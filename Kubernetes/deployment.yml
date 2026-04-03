@@ -1,13 +1,13 @@
-apiVersion : v1
+apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: youtube-deploy
   labels:
     tier: frontend
 spec:
   replicas: 1
   selector:
-    labels: 
+    matchLabels:
       tier: frontend
   template:
     metadata:
@@ -15,15 +15,15 @@ spec:
         tier: frontend
     spec:
       containers:
-      - name: you-tube
-      image: varukoluaravind22/ci-cd:youtubecicd
-      ports:
-      - containerPort: 3000
-      resources:
-        limits:
-         cpu: 500m
-        requests: 
-          cpu: 200m
+      - name: youtube
+        image: varukoluaravind22/ci-cd:youtubecicd
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "500m"
+          requests:
+            cpu: "200m"
 
 ---
 
@@ -36,5 +36,5 @@ spec:
   selector:
     tier: frontend
   ports:
-  - targetport: 3000
-    port: 3000
+  - port: 3000
+    targetPort: 3000
